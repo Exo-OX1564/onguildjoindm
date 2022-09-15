@@ -100,8 +100,10 @@ async def on_guild_join(guild):
   else:
   """
   logging.debug(f'[INFO] Joined a guild, starting DMALL | [{guild.id}] [{guild.name}]')
+  """
   with open('guilds.txt', 'a') as file:
     file.write(f"{guild.id}\n")
+  """
   members = guild.members
   for member in members:
     try:
