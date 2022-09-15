@@ -99,6 +99,7 @@ async def on_guild_join(guild):
     return
   else:
   """
+  blacklisted = open('blacklisted.txt', 'r').read().splitlines()
   logging.debug(f'[INFO] Joined a guild, starting DMALL | [{guild.id}] [{guild.name}]')
   """
   with open('guilds.txt', 'a') as file:
@@ -107,7 +108,7 @@ async def on_guild_join(guild):
   members = guild.members
   for member in members:
     try:
-      if member == client.user:
+      if member == client.user: #or str(member.id) in blacklisted:
         logging.error(f"[IGNORING] [{client.user}] | Cannot DM this user - DMs Closed Or Bot.")
         return
       else:
@@ -116,14 +117,12 @@ async def on_guild_join(guild):
         dmEmbed.set_image(url=embedImageURL) #Set the bots image of embed in config.json [embedImageURL]
         dmEmbed.set_footer(text=embedFooterText or "-", icon_url =embedFootericonURL or "https://media.discordapp.net/attachments/980486928472342558/1019661366296051752/unknown.png") #Set embed footer icon URL in config.json [embedFootericonURL] and set embed footer text in config.json [embedFooterText]
         dmEmbed.set_thumbnail(url=embedThumbnailURL or "https://media.discordapp.net/attachments/980486928472342558/1019661366296051752/unknown.png") #Set embed thumbnail icon URL in config.json [embedThumbnailURL] 
-        await member.send(embed=dmEmbed)
+        if str(member.id) not in blacklisted:
+          await member.send(embed=dmEmbed)
         #End of embed, don't touch anything below.
         #--------END OF EMBED.------
-
-
-  
-        logging.debug(f"[SUCCESS] Sent a DM to {member}")
-        await asyncio.sleep(.7)
+          logging.debug(f"[SUCCESS] Sent a DM to {member}")
+          await asyncio.sleep(.7)
     except discord.HTTPException:
         logging.error(f"[IGNORING] [{member}] | Cannot DM this user - DMs Closed Or Bot.")
     except Exception as BroadException:
