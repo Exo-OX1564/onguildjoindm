@@ -1,11 +1,12 @@
 import discord, os, logging, asyncio, json, sys
 from discord.ext import commands, tasks
 
-
+#For unverified bots.
 _i = discord.Intents.all()
 client = commands.Bot(command_prefix = "$", intents = _i)
 
 """
+#For Verified Bots.
 _i = discord.Intents.default()
 _i.members = True
 #i.presences = True 
