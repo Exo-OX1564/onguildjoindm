@@ -12,7 +12,7 @@ _i.members = True
 #Only enable above if you have presence.
 client = commands.Bot(command_prefix = commands.when__mentioned, intents = _i) 
 #client = commands.AutoShardedBot(command_prefix = commands.when_mentioned, intents = _i, shard_count = 1)
-#Only enable above if your bot needs sharding, and then add the appropriate shard count needed. 3k servers = 3 shards, 4k servers = 4 shards, etc.
+#Only enable above and remove already existing client if your bot needs sharding, and then add the appropriate shard count needed. 3k servers = 3 shards, 4k servers = 4 shards, etc.
 """
 
 
